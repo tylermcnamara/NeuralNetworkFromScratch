@@ -8,7 +8,7 @@ class BackpropagationMethods:
         self.deltas = None
         pass
 
-    # TODO: Compute the deltas for the current sample
+    #Compute the deltas for the current sample
     def ComputeAllDeltas(self, net, input, y):
         N = len(net.Layers) - 1
         #Initialize matrix for delta values
@@ -25,7 +25,7 @@ class BackpropagationMethods:
                     deltas[layIndex - 1, deltaIndex] += weight * deltas[layIndex, neuIndex] * net.Layers[layIndex - 1].NeuronArray[deltaIndex].APrime
         self.deltas = deltas
 
-    # TODO: Compute the partial derivative of the error with respect to the weights based on the deltas
+    #Compute the partial derivative of the error with respect to the weights based on the deltas
     def ComputeWeightPartials(self, net, input):
         allWeightPartials = [] #Initalize list to hold all partial derivatives of error wrt weights based on the deltas of neurons
         for k in range(0, len(net.Layers)): #Iterate through layers with k
@@ -41,7 +41,7 @@ class BackpropagationMethods:
             allWeightPartials.append(layerWeightPartials)
         return allWeightPartials
 
-    # TODO: Compute the partial derivative of the error with respect to the bias based on deltas
+    #Compute the partial derivative of the error with respect to the bias based on deltas
     def ComputerBiasPartials(self, net):
         allBiasPartials = [] #Initialize list to hold all partial derivatives of error wrt bias based on deltas of neurons
         for k in range(0, len(net.Layers)): #Iterate through layers with k
@@ -52,7 +52,7 @@ class BackpropagationMethods:
             allBiasPartials.append(layerBiasPartials)
         return allBiasPartials
 
-    # TODO: Update the weights of the network according to the partials and learning rate
+    #Update the weights of the network according to the partials and learning rate
     def UpdateWeightsGD(self, net, weightPartials, learningRate):
         for k in range(0, len(net.Layers)): #Iterate through layers with k
             currentWeights = net.Layers[k].GetWMatrix() #Get weights stored within current layer
@@ -63,7 +63,7 @@ class BackpropagationMethods:
 
             net.Layers[k].SetWMatrix(currentWeights)
 
-    # TODO: Update the weights of the network according to the partials and learning rate
+    #Update the weights of the network according to the partials and learning rate
     def UpdateBiasesGD(self, net, biasPartials, learningRate):
         for k in range(0, len(net.Layers)): #Iterate through layers with k
             currentBiases = net.Layers[k].GetBMatrix() #Get weights stored within current layer
